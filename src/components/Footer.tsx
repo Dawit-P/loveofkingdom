@@ -60,14 +60,14 @@ export default function Footer({ setCurrentTab, lang }: FooterProps) {
               <Globe className="w-4 h-4 text-white" />
             </a>
             <a 
-              href="mailto:info@kingdomofhislove.org" 
+              href="mailto:Firaoltesfahun50@gmail.com" 
               aria-label="Email Address Link"
               className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 hover:text-tertiary-container transition-all"
             >
               <Mail className="w-4 h-4 text-white" />
             </a>
             <a 
-              href="tel:+251116610000" 
+              href="tel:+251923359640" 
               aria-label="Phone Number Link"
               className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 hover:text-tertiary-container transition-all"
             >

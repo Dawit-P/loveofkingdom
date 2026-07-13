@@ -1,5 +1,5 @@
 import { Language } from '../types';
-import { Eye, Shield, Award, Sparkles, BookOpen, CheckCircle2, Heart, Activity } from 'lucide-react';
+import { Eye, Shield, Award, Sparkles, BookOpen, CheckCircle2, Heart, Activity, Globe, BarChart3, Users, TrendingUp } from 'lucide-react';
 
 interface AboutTabProps {
   lang: Language;
@@ -51,19 +51,38 @@ export default function AboutTab({ lang }: AboutTabProps) {
       val6Title: 'Truth',
       val6Desc: '“You will know the truth, and the truth will set you free.” (John 8:32)',
 
-      leadership: 'Spiritual Leadership Team',
-      leadDesc: 'Dedicated shepherds, teachers, and intercessors committed to your spiritual growth and well-being.',
-      pastorAmare: 'Pastor Amare Tekle',
-      pastorAmareTitle: 'Founder & Lead Pastor',
-      pastorAmareBio: 'Pastor Amare is a visionary leader with a deep apostolic call to restore the foundations of faith and raise up strong kingdom leaders globally.',
-      pastorYohannes: 'Pastor Yohannes Belay',
-      pastorYohannesTitle: 'Associate Pastor',
-      drMartha: 'Dr. Martha Tadesse',
-      drMarthaTitle: 'Family & Women Ministries',
-      evangelistSamuel: 'Evangelist Samuel Alemu',
-      evangelistSamuelTitle: 'Outreach Coordinator',
-      messageTitle: 'A Message from the Lead Pastor',
-      messageDesc: '"Welcome to the Kingdom of His Love! We are honored to walk beside you in your journey of faith. No matter your background or past struggles, there is a place of grace, healing, and absolute restoration awaiting you here."',
+      dashboardTitle: 'World Religious Demographics & Population Share',
+      dashboardSubtitle: 'Global Harvest Field Overview',
+      dashboardDesc: 'A comprehensive statistical breakdown of estimated followers and global population shares across major world religions and belief systems.',
+      top5Title: 'Top 5 Largest Religions by Followers',
+      top5Subtitle: 'The five most widely practiced religious traditions across the globe.',
+      tableTitle: 'Complete Global Religious Distribution',
+      tableSubtitle: 'Detailed estimates of followers and percentage of world population.',
+      colReligion: 'Religion',
+      colFollowers: 'Estimated Followers',
+      colShare: 'World Population Share',
+      colDistribution: 'Proportion',
+      relChristianity: 'Christianity',
+      relIslam: 'Islam',
+      relHinduism: 'Hinduism',
+      relBuddhism: 'Buddhism',
+      relTraditional: 'Traditional / Indigenous Religions',
+      relSikhism: 'Sikhism',
+      relJudaism: 'Judaism',
+      relBahai: 'Baháʼí Faith',
+      relOther: 'Other Religions',
+      relNonReligious: 'Non-Religious (Atheist, Agnostic, etc.)',
+      folChristianity: '2.4 Billion',
+      folIslam: '2.0 Billion',
+      folHinduism: '1.2 Billion',
+      folBuddhism: '500 Million',
+      folTraditional: '430 Million',
+      folSikhism: '30 Million',
+      folJudaism: '15–16 Million',
+      folBahai: '8 Million',
+      folOther: '60 Million',
+      folNonReligious: '1.9 Billion',
+      top5Traditional: 'Traditional Religions',
     },
     am: {
       title: 'የፍቅሩ መንግስት የወንጌል ሚኒስትሪ',
@@ -109,19 +128,38 @@ export default function AboutTab({ lang }: AboutTabProps) {
       val6Title: 'እውነት',
       val6Desc: '“እውነትን ታውቃላችሁ፤ እውነትም ነጻ ታወጣችኋለች።” (ዮሐንስ ፰፥፴፪)',
 
-      leadership: 'መንፈሳዊ መሪዎች ቡድን',
-      leadDesc: 'ለእርስዎ መንፈሳዊ እድገት እና ደህንነት የተሰጡ እረኞች፣ መጋቢዎች እና አማላጆች።',
-      pastorAmare: 'ፓስተር አማረ ተክሌ',
-      pastorAmareTitle: 'መስራች እና ዋና ፓስተር',
-      pastorAmareBio: 'ፓስተር አማረ የእምነት መሠረቶችን ለመመለስ እና ጠንካራ የመንግሥት መሪዎችን በዓለም አቀፍ ደረጃ ለማፍራት ጥልቅ ሐዋርያዊ ጥሪ ያላቸው ባለራዕይ መሪ ናቸው።',
-      pastorYohannes: 'ፓስተር ዮሐንስ በላይ',
-      pastorYohannesTitle: 'ረዳት ፓስተር',
-      drMartha: 'ዶ/ር ማርታ ታደሰ',
-      drMarthaTitle: 'የቤተሰብ እና የሴቶች አገልግሎት',
-      evangelistSamuel: 'ወንጌላዊ ሳሙኤል ዓለሙ',
-      evangelistSamuelTitle: 'የወንጌል ስርጭት አስተባባሪ',
-      messageTitle: 'ከዋናው ፓስተር የተላለፈ መልእክት',
-      messageDesc: '«ወደ ፍቅሩ መንግስት እንኳን በደህና መጡ! በእምነት ጉዞዎ ከጎንዎ ለመሆን ታላቅ ክብር ይሰማናል። የአሁኑ ማንነትዎ ወይም ያለፉት ትግሎቻችሁ ምንም ይሁኑ ምን፣ እዚህ የጸጋ, የፈውስ እና የፍጹም መታደስ ስፍራ ይጠብቆታል።»',
+      dashboardTitle: 'የዓለም ሃይማኖቶች ስታቲስቲክስ እና የሕዝብ ድርሻ',
+      dashboardSubtitle: 'አጠቃላይ የሃይማኖት ተከታዮች መረጃና የዓለም ሁኔታ',
+      dashboardDesc: 'በዓለም ዙሪያ ያሉ ዋና ዋና ሃይማኖቶች እና እምነቶች ግምታዊ የተከታዮች ብዛት እና ከዓለም አጠቃላይ ሕዝብ ያላቸውን የድርሻ መጠን የሚያሳይ መረጃ።',
+      top5Title: 'በብዛት የሚከተሉት 5 ሃይማኖቶች',
+      top5Subtitle: 'በዓለም አቀፍ ደረጃ ከፍተኛ የተከታዮች ቁጥር ያላቸው አምስት ዋና ዋና ሃይማኖቶች።',
+      tableTitle: 'ሙሉ የሃይማኖት ተከታዮች ስርጭት ዝርዝር',
+      tableSubtitle: 'የእያንዳንዱ ሃይማኖት ግምታዊ የተከታዮች ብዛት እና ከዓለም ሕዝብ ድርሻ።',
+      colReligion: 'ሃይማኖት',
+      colFollowers: 'ግምታዊ የተከታዮች ብዛት',
+      colShare: 'ከዓለም ሕዝብ ድርሻ',
+      colDistribution: 'የድርሻ መጠን',
+      relChristianity: 'ክርስትና',
+      relIslam: 'እስልምና',
+      relHinduism: 'ሂንዱይዝም',
+      relBuddhism: 'ቡድሂዝም',
+      relTraditional: 'ባህላዊ/የአገር በቀል ሃይማኖቶች',
+      relSikhism: 'ሲክ ሃይማኖት',
+      relJudaism: 'ይሁዲነት',
+      relBahai: 'ባሃኢ',
+      relOther: 'ሌሎች ሃይማኖቶች',
+      relNonReligious: 'ሃይማኖት የሌላቸው (አቴይስት፣ አግኖስቲክ ወዘተ)',
+      folChristianity: '2.4 ቢሊዮን',
+      folIslam: '2.0 ቢሊዮን',
+      folHinduism: '1.2 ቢሊዮን',
+      folBuddhism: '500 ሚሊዮን',
+      folTraditional: '430 ሚሊዮን',
+      folSikhism: '30 ሚሊዮን',
+      folJudaism: '15–16 ሚሊዮን',
+      folBahai: '8 ሚሊዮን',
+      folOther: '60 ሚሊዮን',
+      folNonReligious: '1.9 ቢሊዮን',
+      top5Traditional: 'ባህላዊ ሃይማኖቶች',
     }
   }[lang];
 
@@ -132,6 +170,27 @@ export default function AboutTab({ lang }: AboutTabProps) {
     { title: t.val4Title, desc: t.val4Desc, icon: Activity, color: 'bg-blue-500/10 text-blue-600 border border-blue-500/20' },
     { title: t.val5Title, desc: t.val5Desc, icon: Award, color: 'bg-purple-500/10 text-purple-600 border border-purple-500/20' },
     { title: t.val6Title, desc: t.val6Desc, icon: Eye, color: 'bg-teal-500/10 text-teal-600 border border-teal-500/20' },
+  ];
+
+  const religionData = [
+    { name: t.relChristianity, followers: t.folChristianity, share: '~29%', percentage: 29, color: 'bg-emerald-600', textAccent: 'text-emerald-700 dark:text-emerald-400', badgeColor: 'bg-emerald-500/10 text-emerald-700 border-emerald-500/30', isTop: true },
+    { name: t.relIslam, followers: t.folIslam, share: '~25%', percentage: 25, color: 'bg-blue-600', textAccent: 'text-blue-600', badgeColor: 'bg-blue-500/10 text-blue-700 border-blue-500/30' },
+    { name: t.relHinduism, followers: t.folHinduism, share: '~15%', percentage: 15, color: 'bg-amber-500', textAccent: 'text-amber-600', badgeColor: 'bg-amber-500/10 text-amber-700 border-amber-500/30' },
+    { name: t.relBuddhism, followers: t.folBuddhism, share: '~6%', percentage: 6, color: 'bg-purple-600', textAccent: 'text-purple-600', badgeColor: 'bg-purple-500/10 text-purple-700 border-purple-500/30' },
+    { name: t.relTraditional, followers: t.folTraditional, share: '~5%', percentage: 5, color: 'bg-rose-500', textAccent: 'text-rose-600', badgeColor: 'bg-rose-500/10 text-rose-700 border-rose-500/30' },
+    { name: t.relSikhism, followers: t.folSikhism, share: '~0.4%', percentage: 0.4, color: 'bg-indigo-500', textAccent: 'text-indigo-600', badgeColor: 'bg-indigo-500/10 text-indigo-700 border-indigo-500/30' },
+    { name: t.relJudaism, followers: t.folJudaism, share: '~0.2%', percentage: 0.2, color: 'bg-sky-500', textAccent: 'text-sky-600', badgeColor: 'bg-sky-500/10 text-sky-700 border-sky-500/30' },
+    { name: t.relBahai, followers: t.folBahai, share: '~0.1%', percentage: 0.1, color: 'bg-teal-500', textAccent: 'text-teal-600', badgeColor: 'bg-teal-500/10 text-teal-700 border-teal-500/30' },
+    { name: t.relOther, followers: t.folOther, share: '~0.7%', percentage: 0.7, color: 'bg-gray-500', textAccent: 'text-gray-600', badgeColor: 'bg-gray-500/10 text-gray-700 border-gray-500/30' },
+    { name: t.relNonReligious, followers: t.folNonReligious, share: '~23%', percentage: 23, color: 'bg-slate-600', textAccent: 'text-slate-600', badgeColor: 'bg-slate-500/10 text-slate-700 border-slate-500/30' },
+  ];
+
+  const top5List = [
+    { rank: 1, name: t.relChristianity, followers: t.folChristianity, share: '~29%', percentage: 29, color: 'from-emerald-500 to-teal-700', bg: 'bg-emerald-50/90 border-emerald-500/30 text-emerald-900', bar: 'bg-emerald-600' },
+    { rank: 2, name: t.relIslam, followers: t.folIslam, share: '~25%', percentage: 25, color: 'from-blue-500 to-indigo-700', bg: 'bg-blue-50/90 border-blue-500/30 text-blue-900', bar: 'bg-blue-600' },
+    { rank: 3, name: t.relHinduism, followers: t.folHinduism, share: '~15%', percentage: 15, color: 'from-amber-500 to-orange-600', bg: 'bg-amber-50/90 border-amber-500/30 text-amber-900', bar: 'bg-amber-500' },
+    { rank: 4, name: t.relBuddhism, followers: t.folBuddhism, share: '~6%', percentage: 6, color: 'from-purple-500 to-violet-600', bg: 'bg-purple-50/90 border-purple-500/30 text-purple-900', bar: 'bg-purple-600' },
+    { rank: 5, name: t.top5Traditional, followers: t.folTraditional, share: '~5%', percentage: 5, color: 'from-rose-500 to-pink-600', bg: 'bg-rose-50/90 border-rose-500/30 text-rose-900', bar: 'bg-rose-500' },
   ];
 
   return (
@@ -268,55 +327,140 @@ export default function AboutTab({ lang }: AboutTabProps) {
         </div>
       </section>
 
-      {/* Pastor Message Callout */}
-      <section className="bg-primary text-white rounded-[32px] overflow-hidden shadow-2xl relative">
-        <div className="absolute inset-0 opacity-10 habesha-pattern pointer-events-none"></div>
-        <div className="grid grid-cols-1 lg:grid-cols-3">
-          <div className="lg:col-span-1 relative h-72 lg:h-auto min-h-[350px] bg-gray-900">
-            <div 
-              className="absolute inset-0 bg-cover bg-center" 
-              style={{ backgroundImage: `url('/gallery/IMG_0776.JPG')` }}
-            ></div>
-          </div>
-          <div className="lg:col-span-2 p-8 md:p-16 flex flex-col justify-center space-y-6 relative z-10">
-            <h3 className="font-serif text-2xl font-bold text-white tracking-wide">{t.messageTitle}</h3>
-            <p className="font-serif text-lg italic text-gray-200 leading-relaxed font-light">
-              {t.messageDesc}
-            </p>
-            <div className="pt-4 border-t border-white/10">
-              <p className="font-serif text-base font-bold text-white">{t.pastorAmare}</p>
-              <p className="font-sans text-[11px] tracking-widest text-tertiary-fixed uppercase font-bold">{t.pastorAmareTitle}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Leadership Section */}
+      {/* World Religions Demographics Dashboard Section */}
       <section className="space-y-12">
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <h2 className="font-serif text-2xl md:text-3xl font-bold text-primary">{t.leadership}</h2>
-          <p className="text-gray-500 font-sans text-sm">{t.leadDesc}</p>
+        {/* Dashboard Hero Header */}
+        <div className="bg-gradient-to-br from-gray-900 via-primary to-gray-900 text-white rounded-[32px] p-8 md:p-14 shadow-2xl relative overflow-hidden border border-white/10">
+          <div className="absolute inset-0 opacity-10 habesha-pattern pointer-events-none"></div>
+          <div className="relative z-10 max-w-3xl space-y-4">
+            <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full border border-white/20 text-xs font-sans font-bold uppercase tracking-widest text-tertiary-fixed">
+              <Globe className="w-4 h-4 text-tertiary-fixed animate-pulse" />
+              <span>{t.dashboardSubtitle}</span>
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
+              {t.dashboardTitle}
+            </h2>
+            <p className="text-gray-300 font-sans text-sm md:text-base leading-relaxed max-w-2xl">
+              {t.dashboardDesc}
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {[
-            { name: t.pastorAmare, title: t.pastorAmareTitle, img: '/gallery/IMG_1507.JPG' },
-            { name: t.pastorYohannes, title: t.pastorYohannesTitle, img: '/gallery/IMG_1517.JPG' },
-            { name: t.drMartha, title: t.drMarthaTitle, img: '/gallery/IMG_1503.JPG' },
-            { name: t.evangelistSamuel, title: t.evangelistSamuelTitle, img: '/gallery/IMG_2430 (1).JPG' }
-          ].map((leader, i) => (
-            <div key={i} className="flex flex-col group text-center bg-white rounded-3xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="aspect-square rounded-2xl overflow-hidden mb-4 relative bg-gray-100">
-                <div 
-                  className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" 
-                  style={{ backgroundImage: `url('${leader.img}')` }}
-                ></div>
-                <div className="absolute inset-0 bg-primary/5"></div>
-              </div>
-              <h3 className="font-serif text-base font-bold text-primary group-hover:text-tertiary transition-colors">{leader.name}</h3>
-              <p className="text-gray-400 font-sans text-[10px] tracking-wider uppercase font-bold mt-1">{leader.title}</p>
+        {/* Top 5 Largest Religions Spotlight Bento */}
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 px-2">
+            <div>
+              <h3 className="font-serif text-2xl md:text-3xl font-bold text-primary flex items-center gap-3">
+                <TrendingUp className="w-7 h-7 text-secondary" />
+                <span>{t.top5Title}</span>
+              </h3>
+              <p className="text-gray-500 font-sans text-xs md:text-sm mt-1">{t.top5Subtitle}</p>
             </div>
-          ))}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            {top5List.map((item) => (
+              <div 
+                key={item.rank} 
+                className={`relative rounded-[28px] p-6 shadow-sm border transition-all duration-300 hover:shadow-lg flex flex-col justify-between overflow-hidden bg-white ${
+                  item.rank === 1 ? 'ring-2 ring-emerald-500/30 border-emerald-500/40 bg-gradient-to-b from-emerald-50/50 to-white' : 'border-gray-100 hover:border-gray-200'
+                }`}
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className={`w-9 h-9 rounded-2xl flex items-center justify-center font-sans font-bold text-sm text-white shadow-sm bg-gradient-to-br ${item.color}`}>
+                      #{item.rank}
+                    </span>
+                    <span className="font-sans font-extrabold text-sm px-3 py-1 rounded-full bg-gray-100 text-gray-800 border border-gray-200/60">
+                      {item.share}
+                    </span>
+                  </div>
+                  <h4 className="font-serif text-lg font-bold text-primary pt-1 leading-snug">
+                    {item.name}
+                  </h4>
+                </div>
+
+                <div className="pt-6 mt-4 border-t border-gray-100 space-y-3">
+                  <div className="flex items-baseline justify-between">
+                    <span className="font-serif text-xl md:text-2xl font-extrabold text-gray-900 tracking-tight">
+                      {item.followers}
+                    </span>
+                  </div>
+                  {/* Miniature Relative Progress Bar */}
+                  <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                    <div 
+                      className={`${item.bar} h-full rounded-full transition-all duration-1000`}
+                      style={{ width: `${Math.min(100, Math.max(10, (item.percentage / 30) * 100))}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Complete Table & Data Distribution */}
+        <div className="glass-card bg-white rounded-[32px] p-6 md:p-10 shadow-sm border border-gray-100 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-6">
+            <div className="space-y-1">
+              <h3 className="font-serif text-2xl font-bold text-primary flex items-center gap-3">
+                <BarChart3 className="w-6 h-6 text-tertiary" />
+                <span>{t.tableTitle}</span>
+              </h3>
+              <p className="text-gray-500 font-sans text-xs md:text-sm">{t.tableSubtitle}</p>
+            </div>
+            <div className="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-2xl border border-gray-100 text-xs font-sans font-semibold text-gray-600 shrink-0">
+              <Users className="w-4 h-4 text-primary" />
+              <span>{lang === 'en' ? 'Global Population Base: ~8.1+ Billion' : 'የዓለም ጠቅላላ ሕዝብ፦ ~8.1+ ቢሊዮን'}</span>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-gray-200/80 text-[11px] md:text-xs font-sans font-extrabold uppercase tracking-wider text-gray-400">
+                  <th className="py-4 px-4">{t.colReligion}</th>
+                  <th className="py-4 px-4">{t.colFollowers}</th>
+                  <th className="py-4 px-4">{t.colShare}</th>
+                  <th className="py-4 px-4 min-w-[160px] md:min-w-[220px]">{t.colDistribution}</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100 text-sm font-sans">
+                {religionData.map((item, idx) => (
+                  <tr key={idx} className="hover:bg-gray-50/80 transition-colors group">
+                    <td className="py-4 px-4 font-semibold text-gray-800 flex items-center gap-3">
+                      <span className={`w-2.5 h-2.5 rounded-full ${item.color} shrink-0`}></span>
+                      <span className="font-serif font-bold text-base text-primary">{item.name}</span>
+                      {item.isTop && (
+                        <span className="text-[10px] font-sans font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                          #1
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-4 px-4 font-extrabold text-gray-900 whitespace-nowrap">
+                      {item.followers}
+                    </td>
+                    <td className="py-4 px-4 whitespace-nowrap">
+                      <span className={`font-bold text-xs px-3 py-1 rounded-full border ${item.badgeColor}`}>
+                        {item.share}
+                      </span>
+                    </td>
+                    <td className="py-4 px-4">
+                      <div className="flex items-center gap-3">
+                        <div className="flex-1 bg-gray-100 h-2.5 rounded-full overflow-hidden">
+                          <div 
+                            className={`${item.color} h-full rounded-full transition-all duration-1000 group-hover:opacity-90`}
+                            style={{ width: `${Math.min(100, Math.max(4, (item.percentage / 30) * 100))}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs font-bold text-gray-400 w-12 text-right">{item.share}</span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     </div>

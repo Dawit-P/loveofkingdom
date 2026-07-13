@@ -1,5 +1,5 @@
 import { Language } from '../types';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, Send, CheckCircle2, Youtube, Video, Share2, ExternalLink } from 'lucide-react';
 import { useState, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -29,16 +29,18 @@ export default function ContactTab({ lang }: ContactTabProps) {
       successTitle: 'Message Dispatched!',
       successDesc: 'We have received your message. Our pastoral office will reach out within 24-48 business hours. Stay blessed!',
       successClose: 'Send Another Message',
-      detailsHeader: 'Headquarters Location',
-      addressLabel: 'Address:',
-      addressVal: 'Bole District, Behind Cameroon Street, Addis Ababa, Ethiopia',
-      phoneLabel: 'Pastoral Office:',
-      phoneVal: '+251 11 661 0000',
-      emailLabel: 'General Inquiries:',
-      emailVal: 'info@kingdomofhislove.org',
-      hoursLabel: 'Administrative Hours:',
-      hoursVal: 'Monday - Friday, 09:00 - 17:00 (EAT)',
-      mapCta: 'Open Directions in Google Maps',
+      detailsHeader: 'Connect With Our Social Channels',
+      phoneLabel: 'Pastoral & Office Phone:',
+      phoneVal: '+251 923359640',
+      emailLabel: 'Official Email:',
+      emailVal: 'Firaoltesfahun50@gmail.com',
+      telegramLabel: 'Telegram Channel:',
+      telegramVal: 'https://t.me/firaoltesfahun',
+      youtubeLabel: 'YouTube Channel:',
+      youtubeVal: '@FiraolTesfahun-k3t',
+      tiktokLabel: 'TikTok Username:',
+      tiktokVal: 'firaol366',
+      communityBanner: 'Kingdom of His Love Gospel Ministry • Global Online Fellowship',
     },
     am: {
       heading: 'ያግኙን',
@@ -53,16 +55,18 @@ export default function ContactTab({ lang }: ContactTabProps) {
       successTitle: 'መልእክትዎ ተልኳል!',
       successDesc: 'መልእክትዎ ደርሶናል። የፓስተር ጽሕፈት ቤታችን በ24-48 የሥራ ሰዓታት ውስጥ ያነጋግርዎታል። ተባረኩ!',
       successClose: 'ሌላ መልእክት ላክ',
-      detailsHeader: 'የአገልግሎቱ ዋና መስሪያ ቤት',
-      addressLabel: 'አድራሻ፡',
-      addressVal: 'ቦሌ ክፍለ ከተማ፣ ከካሜሩን መንገድ ጀርባ፣ አዲስ አበባ፣ ኢትዮጵያ',
-      phoneLabel: 'የፓስተር ቢሮ፡',
-      phoneVal: '+251 11 661 0000',
-      emailLabel: 'አጠቃላይ መጠይቆች፡',
-      emailVal: 'info@kingdomofhislove.org',
-      hoursLabel: 'የቢሮ የሥራ ሰዓታት፡',
-      hoursVal: 'ከሰኞ - አርብ፣ ከጠዋቱ 3:00 - 11:00 (በኢትዮጵያ ሰዓት)',
-      mapCta: 'የአቅጣጫ ካርታውን በጎግል ማፕ ክፈት',
+      detailsHeader: 'የማህበራዊ ሚዲያ እና የመገናኛ አድራሻዎቻችን',
+      phoneLabel: 'የስልክ ቁጥር፡',
+      phoneVal: '+251 923359640',
+      emailLabel: 'የኢሜል አድራሻ፡',
+      emailVal: 'Firaoltesfahun50@gmail.com',
+      telegramLabel: 'የቴሌግራም ቻናል፡',
+      telegramVal: 'https://t.me/firaoltesfahun',
+      youtubeLabel: 'የዩቲዩብ ቻናል፡',
+      youtubeVal: '@FiraolTesfahun-k3t',
+      tiktokLabel: 'የቲክቶክ አድራሻ፡',
+      tiktokVal: 'firaol366',
+      communityBanner: 'የፍቅሩ መንግሥት ወንጌል አገልግሎት • የዓለም አቀፍ የመስመር ላይ ሕብረት',
     }
   }[lang];
 
@@ -198,71 +202,119 @@ export default function ContactTab({ lang }: ContactTabProps) {
         </div>
       </div>
 
-      {/* Info & Map Display (Right 6 Columns) */}
+      {/* Info & Social Channels Display (Right 6 Columns) */}
       <div className="lg:col-span-6 space-y-8 text-left">
         <div className="space-y-6">
-          <h2 className="font-serif text-xl font-bold text-primary">{t.detailsHeader}</h2>
+          <h2 className="font-serif text-2xl font-bold text-primary">{t.detailsHeader}</h2>
 
-          <div className="space-y-4 text-sm font-sans text-gray-600">
-            {/* Address */}
-            <div className="flex gap-3 items-start">
-              <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
-              <div>
-                <strong>{t.addressLabel}</strong>
-                <p className="mt-0.5">{t.addressVal}</p>
-              </div>
-            </div>
-
+          <div className="space-y-4 text-sm font-sans">
             {/* Phone */}
-            <div className="flex gap-3 items-start">
-              <Phone className="w-5 h-5 text-tertiary shrink-0 mt-0.5" />
-              <div>
-                <strong>{t.phoneLabel}</strong>
-                <p className="mt-0.5">{t.phoneVal}</p>
+            <a
+              href="tel:+251923359640"
+              className="flex items-center justify-between p-4 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-gray-400 uppercase tracking-wider">{t.phoneLabel}</div>
+                  <div className="font-extrabold text-gray-900 text-base mt-0.5">{t.phoneVal}</div>
+                </div>
               </div>
-            </div>
+              <ExternalLink className="w-4 h-4 text-gray-300 group-hover:text-emerald-600 transition-colors" />
+            </a>
 
             {/* Email */}
-            <div className="flex gap-3 items-start">
-              <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-              <div>
-                <strong>{t.emailLabel}</strong>
-                <p className="mt-0.5">{t.emailVal}</p>
+            <a
+              href="mailto:Firaoltesfahun50@gmail.com"
+              className="flex items-center justify-between p-4 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-gray-400 uppercase tracking-wider">{t.emailLabel}</div>
+                  <div className="font-extrabold text-gray-900 text-base mt-0.5 break-all">Firaoltesfahun50@gmail.com</div>
+                </div>
               </div>
-            </div>
+              <ExternalLink className="w-4 h-4 text-gray-300 group-hover:text-blue-600 transition-colors" />
+            </a>
 
-            {/* Hours */}
-            <div className="flex gap-3 items-start">
-              <Clock className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />
-              <div>
-                <strong>{t.hoursLabel}</strong>
-                <p className="mt-0.5">{t.hoursVal}</p>
+            {/* Telegram Channel */}
+            <a
+              href="https://t.me/firaoltesfahun"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-sky-200 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Share2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-gray-400 uppercase tracking-wider">{t.telegramLabel}</div>
+                  <div className="font-extrabold text-sky-600 text-base mt-0.5 break-all">https://t.me/firaoltesfahun</div>
+                </div>
               </div>
-            </div>
+              <ExternalLink className="w-4 h-4 text-gray-300 group-hover:text-sky-600 transition-colors" />
+            </a>
+
+            {/* YouTube Channel */}
+            <a
+              href="https://youtube.com/@FiraolTesfahun-k3t"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-red-200 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-red-500/10 text-red-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Youtube className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-gray-400 uppercase tracking-wider">{t.youtubeLabel}</div>
+                  <div className="font-extrabold text-gray-900 text-base mt-0.5">@FiraolTesfahun-k3t</div>
+                </div>
+              </div>
+              <ExternalLink className="w-4 h-4 text-gray-300 group-hover:text-red-600 transition-colors" />
+            </a>
+
+            {/* TikTok Username */}
+            <a
+              href="https://tiktok.com/@firaol366"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-purple-200 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Video className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-gray-400 uppercase tracking-wider">{t.tiktokLabel}</div>
+                  <div className="font-extrabold text-gray-900 text-base mt-0.5">firaol366</div>
+                </div>
+              </div>
+              <ExternalLink className="w-4 h-4 text-gray-300 group-hover:text-purple-600 transition-colors" />
+            </a>
           </div>
         </div>
 
-        {/* Beautiful Map Graphic Block */}
-        <div className="rounded-[32px] overflow-hidden border border-gray-200 shadow-sm relative group bg-gray-100">
-          <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors z-10 pointer-events-none"></div>
+        {/* Beautiful Ministry Graphic Block (Without Bole/Google Map text) */}
+        <div className="rounded-[32px] overflow-hidden border border-gray-200 shadow-md relative group bg-gray-900 mt-4">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 pointer-events-none"></div>
           <img
             src="/gallery/IMG_1507.JPG"
             referrerPolicy="no-referrer"
-            alt="Bole District Map Layout"
-            className="w-full h-56 object-cover group-hover:scale-102 transition-transform duration-700"
+            alt="Kingdom of His Love Fellowship & Ministry"
+            className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-700"
           />
-          <div className="p-4 bg-white flex justify-between items-center relative z-20">
-            <span className="font-serif text-xs font-bold text-primary">Bole District, Addis Ababa</span>
-            <a
-              id="google-maps-directions-link"
-              href="https://maps.google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-sans font-bold text-tertiary hover:text-primary transition-colors flex items-center gap-1"
-            >
-              <span>{t.mapCta}</span>
-              <span>→</span>
-            </a>
+          <div className="p-5 bg-white/95 backdrop-blur-md flex justify-between items-center relative z-20 border-t border-gray-100">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="font-serif text-sm font-bold text-primary">{t.communityBanner}</span>
+            </div>
           </div>
         </div>
       </div>

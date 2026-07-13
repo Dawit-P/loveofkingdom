@@ -39,7 +39,7 @@ export default function HomeTab({
     en: {
       subName: 'የፍቅሩ መንግስት',
       fullName: 'Kingdom of His Love Gospel Ministry',
-      heroDesc: 'Bridging traditional spiritual values with contemporary excellence for a global Ethiopian community.',
+      heroDesc: '"He has rescued us from the dominion of darkness and brought us into the kingdom of the Son he loves, in whom we have redemption, the forgiveness of sins." — Colossians 1:13–14',
       watchLatest: 'Watch Latest Sermon',
       exploreMinistries: 'Explore Ministries',
       verse: '"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."',
@@ -70,7 +70,7 @@ export default function HomeTab({
     am: {
       subName: 'የፍቅሩ መንግስት',
       fullName: 'የፍቅሩ መንግሥት ወንጌል አገልግሎት',
-      heroDesc: 'ለዓለም አቀፍ የኢትዮጵያ ማህበረሰብ ጥንታዊ መንፈሳዊ እሴቶችን ከዘመናዊ የላቀ ብቃት ጋር ማገናኘት።',
+      heroDesc: '«እርሱ ከጨለማ ሥልጣን አዳነን፥ ቤዛነቱንም እርሱንም የኃጢአትን ስርየት ወዳገኘንበት ወደ ፍቅሩ ልጅ መንግሥት አፈለሰን።» — ቆላ. 1፡13-14',
       watchLatest: 'የቅርብ ጊዜ ስብከትን ይመልከቱ',
       exploreMinistries: 'አገልግሎቶችን ይረዱ',
       verse: '«በእርሱ የሚያምን ሁሉ የዘላለም ሕይወት እንዲኖረው እንጂ እንዳይጠፋ እግዚአብሔር አንድያ ልጁን እስኪሰጥ ድረስ ዓለሙን እንዲሁ ወዶአልና።»',
@@ -121,7 +121,7 @@ export default function HomeTab({
           <h1 className="font-serif text-xl md:text-3xl text-white/95 mb-8 max-w-3xl mx-auto tracking-wide font-semibold">
             {t.fullName}
           </h1>
-          <p className="font-sans text-base md:text-lg text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="font-serif text-base md:text-xl text-white/95 mb-10 max-w-3xl mx-auto leading-relaxed italic font-medium tracking-wide drop-shadow-md">
             {t.heroDesc}
           </p>
           
