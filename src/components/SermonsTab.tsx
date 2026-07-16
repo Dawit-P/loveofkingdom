@@ -159,7 +159,6 @@ export default function SermonsTab({ lang, sermons, onPlaySermon }: SermonsTabPr
           <button
             onClick={() => {
               setSearchTerm('');
-              setActiveCategory('All');
             }}
             className="text-primary font-bold text-xs underline"
           >

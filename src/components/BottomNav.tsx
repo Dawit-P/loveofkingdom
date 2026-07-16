@@ -1,5 +1,5 @@
 import { Language } from '../types';
-import { Home, PlaySquare, MessageSquare, Heart } from 'lucide-react';
+import { Home, PlaySquare, Info, Heart } from 'lucide-react';
 
 interface BottomNavProps {
   currentTab: string;
@@ -11,7 +11,7 @@ export default function BottomNav({ currentTab, setCurrentTab, lang }: BottomNav
   const tabs = [
     { id: 'home', en: 'Home', am: 'ቤት', icon: Home },
     { id: 'sermons', en: 'Sermons', am: 'ስብከቶች', icon: PlaySquare },
-    { id: 'prayer', en: 'Prayer', am: 'ጸሎት', icon: MessageSquare },
+    { id: 'about', en: 'About Us', am: 'ስለ እኛ', icon: Info },
     { id: 'donate', en: 'Donate', am: 'ይደግፉ', icon: Heart },
   ];
 
