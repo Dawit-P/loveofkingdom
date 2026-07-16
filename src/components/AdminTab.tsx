@@ -44,7 +44,7 @@ export default function AdminTab({
   deleteMember,
 }: AdminTabProps) {
   const baseUrl = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:3000';
-  const secretPath = import.meta.env.VITE_ADMIN_SECRET_PATH || '/adminsecretfiraol';
+  const secretPath = import.meta.env.VITE_ADMIN_SECRET_PATH || '/admin8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [pinInput, setPinInput] = useState<string>('');
   const [pinError, setPinError] = useState<string>('');
@@ -263,11 +263,18 @@ export default function AdminTab({
 
   const handlePinSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (pinInput === '2024' || pinInput === '1234') {
+    const adminPass = import.meta.env.VITE_ADMIN_PASSWORD || 'LoveOfKingdom#8c6976e5!';
+    const sha256Hash = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
+    if (
+      pinInput === adminPass ||
+      pinInput === sha256Hash ||
+      pinInput === 'LoveOfKingdom#8c6976e5!' ||
+      pinInput === '2024'
+    ) {
       setIsAuthenticated(true);
       setPinError('');
     } else {
-      setPinError(lang === 'en' ? 'Invalid PIN code. Access Denied.' : 'የተሳሳተ የይለፍ ቁጥር። አይፈቀድም።');
+      setPinError(lang === 'en' ? 'Invalid credentials. Access Denied.' : 'የተሳሳተ የይለፍ ቃል ወይም ቁጥር። አይፈቀድም።');
     }
   };
 
@@ -414,8 +421,8 @@ export const GALLERY_ITEMS: GalleryItem[] = ${JSON.stringify(galleryItems, null,
             </h2>
             <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
               {lang === 'en'
-                ? 'Enter your 4-digit security PIN to access the Kingdom CRM and media management desk.'
-                : 'የፍቅሩ መንግስት አጋሮችና ይዘቶች ማስተካከያ አዳራሽ ለመግባት የይለፍ ቁጥርዎን ያስገቡ።'}
+                ? 'Enter your secret admin password, SHA-256 key, or security PIN to access the Kingdom CRM and media management desk.'
+                : 'የፍቅሩ መንግስት አጋሮችና ይዘቶች ማስተካከያ አዳራሽ ለመግባት ሚስጥራዊ የይለፍ ቃልዎን ወይም ቁጥርዎን ያስገቡ።'}
             </p>
           </div>
 
@@ -423,11 +430,11 @@ export const GALLERY_ITEMS: GalleryItem[] = ${JSON.stringify(galleryItems, null,
             <div className="relative">
               <input
                 type="password"
-                maxLength={8}
+                maxLength={64}
                 value={pinInput}
                 onChange={(e) => setPinInput(e.target.value)}
-                placeholder="• • • •"
-                className="w-full text-center tracking-[0.5em] font-mono text-2xl bg-gray-50 border border-gray-200 focus:border-primary text-gray-900 rounded-2xl py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-400 placeholder:tracking-normal"
+                placeholder="Secret Password / PIN"
+                className="w-full text-center font-mono sm:text-lg bg-gray-50 border border-gray-200 focus:border-primary text-gray-900 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-400"
                 autoFocus
               />
               <Lock className="w-5 h-5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2" />

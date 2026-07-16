@@ -18,10 +18,14 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, Play, BookOpen, Clock, Calendar, User } from 'lucide-react';
 
 export default function App() {
-  const secretPath = import.meta.env.VITE_ADMIN_SECRET_PATH || '/adminsecretfiraol';
+  const secretPath = import.meta.env.VITE_ADMIN_SECRET_PATH || '/admin8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
 
   const [currentTab, setCurrentTab] = useState<string>(() => {
-    if (typeof window !== 'undefined' && window.location.pathname.toLowerCase().includes(secretPath.toLowerCase())) {
+    if (
+      typeof window !== 'undefined' &&
+      (window.location.pathname.toLowerCase().includes(secretPath.toLowerCase()) ||
+       window.location.pathname.toLowerCase().includes('8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'))
+    ) {
       return 'admin';
     }
     return 'home';
