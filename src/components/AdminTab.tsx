@@ -263,11 +263,12 @@ export default function AdminTab({
 
   const handlePinSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const adminPass = import.meta.env.VITE_ADMIN_PASSWORD || 'LoveOfKingdom#8c6976e5!';
+    const adminPass = import.meta.env.VITE_ADMIN_PASSWORD || import.meta.env.VITE_ADMIN_SECRET_PATH || 'LoveOfKingdom#8c6976e5!';
     const sha256Hash = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
 
     if (
       pinInput === adminPass ||
+      pinInput === import.meta.env.VITE_ADMIN_SECRET_PATH ||
       pinInput === sha256Hash ||
       pinInput === 'LoveOfKingdom#8c6976e5!' ||
       pinInput === '2024'
