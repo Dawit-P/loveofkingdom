@@ -59,8 +59,7 @@ export default async function handler(req, res) {
 
       for (const item of items) {
         if (!item || !item.id) continue;
-        const rawJson = JSON.stringify(item);
-        const id = item.id;
+        let id = item.id;
         const fullName = item.fullName || 'Unknown';
         const phone = item.phone || '';
         const email = item.email || '';
@@ -70,6 +69,18 @@ export default async function handler(req, res) {
         const paymentMethod = item.paymentMethod || 'CBE';
         const dateRegistered = item.dateRegistered || new Date().toISOString().split('T')[0];
         const status = item.status || 'Pending';
+
+        if (!phone.trim() || phone.trim().length < 6) continue;
+
+        // Server-Side Duplicate Check: if phone exists, update existing record rather than creating a duplicate
+        if (!Array.isArray(payload) && phone.trim()) {
+          const existingRows = await sql(`SELECT id FROM partners WHERE phone = $1 LIMIT 1`, [phone.trim()]);
+          if (existingRows.length > 0) {
+            id = existingRows[0].id;
+          }
+        }
+
+        const rawJson = JSON.stringify({ ...item, id });
 
         await sql(`
           INSERT INTO partners (
@@ -87,7 +98,7 @@ export default async function handler(req, res) {
             payment_method = EXCLUDED.payment_method,
             status = EXCLUDED.status,
             raw_json = EXCLUDED.raw_json;
-        `, [id, fullName, phone, email, city, tier, monthlyAmountRange, paymentMethod, dateRegistered, status, rawJson]);
+        `, [id, fullName, phone.trim(), email, city, tier, monthlyAmountRange, paymentMethod, dateRegistered, status, rawJson]);
       }
 
       const rows = await sql(`SELECT raw_json FROM partners ORDER BY date_registered DESC, id DESC`);

@@ -1,6 +1,6 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { Language, PartnerTier, MinistryArea, Partner, Member } from '../types';
-import { Heart, Users, ShieldCheck, CheckCircle, Sparkles, Send, Award, MapPin, Phone, Mail, Building2, BookOpen } from 'lucide-react';
+import { Heart, Users, ShieldCheck, CheckCircle, Sparkles, Send, Award, MapPin, Phone, Mail, Building2, BookOpen, AlertCircle, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface MembershipTabProps {
@@ -8,12 +8,25 @@ interface MembershipTabProps {
   addPartner: (partner: Omit<Partner, 'id' | 'dateRegistered' | 'status'>) => Partner;
   addMember: (member: Omit<Member, 'id' | 'dateRegistered' | 'status'>) => Member;
   initialMode?: 'partner' | 'member';
+  partners?: Partner[];
+  members?: Member[];
+  onNavigateHome?: () => void;
 }
 
 type RegistrationMode = 'partner' | 'member';
 
-export default function MembershipTab({ lang, addPartner, addMember, initialMode = 'partner' }: MembershipTabProps) {
+export default function MembershipTab({
+  lang,
+  addPartner,
+  addMember,
+  initialMode = 'partner',
+  partners = [],
+  members = [],
+  onNavigateHome,
+}: MembershipTabProps) {
   const [activeMode, setActiveMode] = useState<RegistrationMode>(initialMode);
+  const [splashOverlay, setSplashOverlay] = useState<{ type: 'partner' | 'member'; name: string } | null>(null);
+  const [regError, setRegError] = useState<string | null>(null);
 
   useEffect(() => {
     if (initialMode) {
@@ -88,6 +101,29 @@ export default function MembershipTab({ lang, addPartner, addMember, initialMode
     e.preventDefault();
     if (!partnerName.trim() || !partnerPhone.trim()) return;
 
+    // 1. Cooldown Rate-Limit Check (Prevent spamming multiple registrations)
+    const lastTime = localStorage.getItem('kohl_last_reg_time');
+    if (lastTime && Date.now() - Number(lastTime) < 12 * 60 * 60 * 1000) {
+      setRegError(
+        lang === 'en'
+          ? 'You have already submitted a registration recently. To protect our database from duplicate entries, please wait before registering again or contact our leadership directly.'
+          : 'በቅርቡ የምዝገባ ቅጽ አስገብተዋል። የውሂብ አዳራሻችንን ከድግግሞሽ ለመጠበቅ፣ እባክዎ ትንሽ ቆይተው ይሞክሩ።'
+      );
+      return;
+    }
+
+    // 2. Duplicate Phone Check
+    const cleanPhone = partnerPhone.trim().replace(/\s+/g, '');
+    if (partners && partners.some((p) => p.phone.replace(/\s+/g, '') === cleanPhone)) {
+      setRegError(
+        lang === 'en'
+          ? 'This phone number is already registered inside our Kingdom Partner records! You do not need to register again.'
+          : 'ይህ ስልክ ቁጥር ከዚህ ቀደም በስርዓታችን እንደ አጋር ተመዝግቧል! እንደገና መመዝገብ አያስፈልገዎትም።'
+      );
+      return;
+    }
+
+    setRegError(null);
     setPartnerSubmitting(true);
     setTimeout(() => {
       const selectedTierObj = tiers.find((t) => t.id === selectedTier) || tiers[2];
@@ -101,8 +137,10 @@ export default function MembershipTab({ lang, addPartner, addMember, initialMode
         paymentMethod: paymentBank,
       });
 
+      localStorage.setItem('kohl_last_reg_time', Date.now().toString());
       setPartnerSubmitting(false);
       setPartnerSuccess(true);
+      setSplashOverlay({ type: 'partner', name: partnerName.trim() });
       setPartnerName('');
       setPartnerPhone('');
       setPartnerEmail('');
@@ -116,6 +154,29 @@ export default function MembershipTab({ lang, addPartner, addMember, initialMode
     e.preventDefault();
     if (!memberName.trim() || !memberPhone.trim() || !memberCity.trim()) return;
 
+    // 1. Cooldown Rate-Limit Check
+    const lastTime = localStorage.getItem('kohl_last_reg_time');
+    if (lastTime && Date.now() - Number(lastTime) < 12 * 60 * 60 * 1000) {
+      setRegError(
+        lang === 'en'
+          ? 'You have already submitted a registration recently. To protect our database from duplicate entries, please wait before registering again or contact our leadership directly.'
+          : 'በቅርቡ የምዝገባ ቅጽ አስገብተዋል። የውሂብ አዳራሻችንን ከድግግሞሽ ለመጠበቅ፣ እባክዎ ትንሽ ቆይተው ይሞክሩ።'
+      );
+      return;
+    }
+
+    // 2. Duplicate Phone Check
+    const cleanPhone = memberPhone.trim().replace(/\s+/g, '');
+    if (members && members.some((m) => m.phone.replace(/\s+/g, '') === cleanPhone)) {
+      setRegError(
+        lang === 'en'
+          ? 'This phone number is already registered inside our Kingdom Member records! You do not need to register again.'
+          : 'ይህ ስልክ ቁጥር ከዚህ ቀደም በስርዓታችን እንደ አባል ተመዝግቧል! እንደገና መመዝገብ አያስፈልገዎትም።'
+      );
+      return;
+    }
+
+    setRegError(null);
     setMemberSubmitting(true);
     setTimeout(() => {
       addMember({
@@ -127,8 +188,10 @@ export default function MembershipTab({ lang, addPartner, addMember, initialMode
         statement: memberStatement.trim() || (lang === 'en' ? 'Eager to serve and preach the Kingdom of His Love Gospel.' : 'የፍቅሩን መንግስት ወንጌል ለመስበክና ለማገልገል።'),
       });
 
+      localStorage.setItem('kohl_last_reg_time', Date.now().toString());
       setMemberSubmitting(false);
       setMemberSuccess(true);
+      setSplashOverlay({ type: 'member', name: memberName.trim() });
       setMemberName('');
       setMemberPhone('');
       setMemberEmail('');
@@ -193,7 +256,88 @@ export default function MembershipTab({ lang, addPartner, addMember, initialMode
   }[lang];
 
   return (
-    <div id="membership-view" className="py-24 bg-background px-6 md:px-12 max-w-7xl mx-auto space-y-12 animate-fade-up">
+    <div id="membership-view" className="py-24 bg-background px-6 md:px-12 max-w-7xl mx-auto space-y-12 animate-fade-up relative">
+      {/* Celebration Splash Overlay Modal in front of screen */}
+      <AnimatePresence>
+        {splashOverlay && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 30 }}
+              className="bg-white rounded-[40px] p-8 sm:p-14 max-w-lg w-full shadow-2xl border border-primary/20 text-center relative overflow-hidden"
+            >
+              <div className="bg-gradient-to-r from-primary via-secondary to-tertiary h-3 w-full absolute top-0 left-0" />
+              <button
+                onClick={() => {
+                  setSplashOverlay(null);
+                  if (onNavigateHome) onNavigateHome();
+                  else window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="absolute top-5 right-5 p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner text-green-600 animate-bounce">
+                <CheckCircle className="w-14 h-14" />
+              </div>
+
+              <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary font-bold text-xs uppercase tracking-widest inline-block mb-3">
+                {lang === 'en' ? 'Registration Complete' : 'ምዝገባው ተጠናቋል'}
+              </span>
+
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-primary mb-3">
+                {lang === 'en' ? 'Welcome to the Kingdom Family!' : 'እንኳን ወደ ፍቅሩ መንግስት ቤተሰብ በደህና መጡ!'}
+              </h2>
+
+              <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-8">
+                {lang === 'en'
+                  ? `Thank you, ${splashOverlay.name}! Your ${splashOverlay.type === 'partner' ? 'partnership covenant' : 'ministry membership application'} has been securely recorded in our global Neon database. Our leadership team and pastoral intercessors will review your details and connect with you shortly.`
+                  : `እናመሰግናለን, ${splashOverlay.name}! የ${splashOverlay.type === 'partner' ? 'አጋርነት' : 'አባልነት'} ምዝገባዎ በስርዓታችን በትክክል ተመዝግቧል። የአገልግሎታችን መሪዎችና የጸሎት አስተባባሪዎች መረጃዎን አይተው በተመዘገበው ስልክ ቁጥርዎ በቅርቡ ያገኙዎታል።`}
+              </p>
+
+              <button
+                onClick={() => {
+                  setSplashOverlay(null);
+                  if (onNavigateHome) onNavigateHome();
+                  else window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-primary via-secondary to-primary text-white font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all cursor-pointer flex items-center justify-center gap-2"
+              >
+                <Sparkles className="w-5 h-5 text-tertiary" />
+                <span>{lang === 'en' ? 'Close & Return to Home Page' : 'ዘግተው ወደ ዋና ገጽ ይመለሱ'}</span>
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Flood Error Alert Banner */}
+      <AnimatePresence>
+        {regError && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="max-w-3xl mx-auto p-5 bg-red-50 border border-red-200 rounded-3xl flex items-center justify-between gap-4 text-red-900 shadow-sm"
+          >
+            <div className="flex items-center gap-3">
+              <AlertCircle className="w-6 h-6 text-red-600 shrink-0" />
+              <p className="text-sm font-bold leading-relaxed">{regError}</p>
+            </div>
+            <button onClick={() => setRegError(null)} className="p-1 hover:bg-red-100 rounded-full text-red-600 cursor-pointer">
+              <X className="w-5 h-5" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-sans font-bold uppercase tracking-widest">

@@ -115,7 +115,17 @@ export default function App() {
       case 'donate':
         return <DonateTab lang={lang} />;
       case 'membership':
-        return <MembershipTab lang={lang} addPartner={addPartner} addMember={addMember} initialMode={membershipMode} />;
+        return (
+          <MembershipTab
+            lang={lang}
+            addPartner={addPartner}
+            addMember={addMember}
+            partners={partners}
+            members={members}
+            onNavigateHome={() => setCurrentTab('home')}
+            initialMode={membershipMode}
+          />
+        );
       case 'contact':
         return <ContactTab lang={lang} />;
       case 'admin':
