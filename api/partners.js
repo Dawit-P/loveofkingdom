@@ -29,7 +29,7 @@ export default async function handler(req, res) {
     const sql = neon(connectionString);
 
     // Ensure partners table exists with structured columns + JSONB payload
-    await sql(`
+    await sql`
       CREATE TABLE IF NOT EXISTS partners (
         id VARCHAR(255) PRIMARY KEY,
         full_name VARCHAR(255) NOT NULL,
@@ -42,11 +42,11 @@ export default async function handler(req, res) {
         date_registered VARCHAR(100),
         status VARCHAR(100),
         raw_json JSONB
-      );
-    `);
+      )
+    `;
 
     if (req.method === 'GET') {
-      const rows = await sql(`SELECT raw_json FROM partners ORDER BY date_registered DESC, id DESC`);
+      const rows = await sql`SELECT raw_json FROM partners ORDER BY date_registered DESC, id DESC`;
       const partnersList = rows.map((r) => typeof r.raw_json === 'string' ? JSON.parse(r.raw_json) : r.raw_json);
       return res.status(200).json({
         success: true,
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
 
         // Server-Side Duplicate Check: if phone exists, update existing record rather than creating a duplicate
         if (!Array.isArray(payload) && phone.trim()) {
-          const existingRows = await sql(`SELECT id FROM partners WHERE phone = $1 LIMIT 1`, [phone.trim()]);
+          const existingRows = await sql`SELECT id FROM partners WHERE phone = ${phone.trim()} LIMIT 1`;
           if (existingRows.length > 0) {
             id = existingRows[0].id;
           }
@@ -82,11 +82,11 @@ export default async function handler(req, res) {
 
         const rawJson = JSON.stringify({ ...item, id });
 
-        await sql(`
+        await sql`
           INSERT INTO partners (
             id, full_name, phone, email, city, tier, monthly_amount_range, payment_method, date_registered, status, raw_json
           ) VALUES (
-            $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11::jsonb
+            ${id}, ${fullName}, ${phone.trim()}, ${email}, ${city}, ${tier}, ${monthlyAmountRange}, ${paymentMethod}, ${dateRegistered}, ${status}, ${rawJson}::jsonb
           )
           ON CONFLICT (id) DO UPDATE SET
             full_name = EXCLUDED.full_name,
@@ -97,11 +97,11 @@ export default async function handler(req, res) {
             monthly_amount_range = EXCLUDED.monthly_amount_range,
             payment_method = EXCLUDED.payment_method,
             status = EXCLUDED.status,
-            raw_json = EXCLUDED.raw_json;
-        `, [id, fullName, phone.trim(), email, city, tier, monthlyAmountRange, paymentMethod, dateRegistered, status, rawJson]);
+            raw_json = EXCLUDED.raw_json
+        `;
       }
 
-      const rows = await sql(`SELECT raw_json FROM partners ORDER BY date_registered DESC, id DESC`);
+      const rows = await sql`SELECT raw_json FROM partners ORDER BY date_registered DESC, id DESC`;
       const partnersList = rows.map((r) => typeof r.raw_json === 'string' ? JSON.parse(r.raw_json) : r.raw_json);
       return res.status(200).json({
         success: true,
@@ -111,7 +111,7 @@ export default async function handler(req, res) {
     } else if (req.method === 'DELETE') {
       const { id } = req.query;
       if (id) {
-        await sql(`DELETE FROM partners WHERE id = $1`, [id]);
+        await sql`DELETE FROM partners WHERE id = ${id}`;
       }
       return res.status(200).json({ success: true });
     }
