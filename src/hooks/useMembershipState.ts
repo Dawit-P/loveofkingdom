@@ -174,6 +174,7 @@ export function useMembershipState() {
 
   const deletePartner = (id: string) => {
     setPartners((prev) => prev.filter((p) => p.id !== id));
+    fetch(`/api/partners?id=${encodeURIComponent(id)}`, { method: 'DELETE' }).catch(() => {});
   };
 
   const addMember = (newMemberData: Omit<Member, 'id' | 'dateRegistered' | 'status'>): Member => {
@@ -195,6 +196,7 @@ export function useMembershipState() {
 
   const deleteMember = (id: string) => {
     setMembers((prev) => prev.filter((m) => m.id !== id));
+    fetch(`/api/members?id=${encodeURIComponent(id)}`, { method: 'DELETE' }).catch(() => {});
   };
 
   return {
