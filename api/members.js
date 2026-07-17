@@ -45,6 +45,10 @@ export default async function handler(req, res) {
     `;
 
     if (req.method === 'GET') {
+      // Clean out any legacy mock data if previously inserted
+      await sql`
+        DELETE FROM members WHERE id IN ('member-1', 'member-2', 'member-3') OR full_name IN ('Evangelist Yosef Kebede', 'Meron Solomon', 'Samuel Girma')
+      `;
       const rows = await sql`SELECT raw_json FROM members ORDER BY date_registered DESC, id DESC`;
       const membersList = rows.map((r) => typeof r.raw_json === 'string' ? JSON.parse(r.raw_json) : r.raw_json);
       return res.status(200).json({

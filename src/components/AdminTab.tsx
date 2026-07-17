@@ -261,10 +261,11 @@ export default function AdminTab({
   const [photoCover, setPhotoCover] = useState('/gallery/media__1783860205225.jpg');
   const [photoCategory, setPhotoCategory] = useState<'Worship' | 'Fellowship' | 'Baptism' | 'Youth' | 'Children'>('Worship');
 
-  const handlePinSubmit = (e: FormEvent) => {
+  const handlePinSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const adminPass = import.meta.env.VITE_ADMIN_PASSWORD || 'LoveOfKingdom#8c6976e5!';
     const sha256Hash = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
+
     if (
       pinInput === adminPass ||
       pinInput === sha256Hash ||
@@ -273,9 +274,27 @@ export default function AdminTab({
     ) {
       setIsAuthenticated(true);
       setPinError('');
-    } else {
-      setPinError(lang === 'en' ? 'Invalid credentials. Access Denied.' : 'የተሳሳተ የይለፍ ቃል ወይም ቁጥር። አይፈቀድም።');
+      return;
     }
+
+    // Check server-side ADMIN_PASSWORD via secure Vercel API endpoint
+    try {
+      const res = await fetch('/api/verify-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pinInput }),
+      });
+      const data = await res.json();
+      if (data && data.authenticated) {
+        setIsAuthenticated(true);
+        setPinError('');
+        return;
+      }
+    } catch (err) {
+      console.error('Admin verification error:', err);
+    }
+
+    setPinError(lang === 'en' ? 'Invalid credentials. Access Denied.' : 'የተሳሳተ የይለፍ ቃል ወይም ቁጥር። አይፈቀድም።');
   };
 
   const resetVideoForm = () => {
