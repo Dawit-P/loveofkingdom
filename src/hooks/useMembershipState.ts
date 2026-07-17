@@ -115,11 +115,44 @@ export function useMembershipState() {
   });
 
   useEffect(() => {
+    // 1. Fetch from cloud on mount
+    fetch('/api/partners')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.success && data.data && Array.isArray(data.data)) {
+          setPartners(data.data);
+          localStorage.setItem(STORAGE_KEY_PARTNERS, JSON.stringify(data.data));
+        }
+      })
+      .catch(() => {});
+
+    fetch('/api/members')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.success && data.data && Array.isArray(data.data)) {
+          setMembers(data.data);
+          localStorage.setItem(STORAGE_KEY_MEMBERS, JSON.stringify(data.data));
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem(STORAGE_KEY_PARTNERS, JSON.stringify(partners));
+    fetch('/api/partners', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(partners),
+    }).catch(() => {});
   }, [partners]);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY_MEMBERS, JSON.stringify(members));
+    fetch('/api/members', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(members),
+    }).catch(() => {});
   }, [members]);
 
   const addPartner = (newPartnerData: Omit<Partner, 'id' | 'dateRegistered' | 'status'>): Partner => {
